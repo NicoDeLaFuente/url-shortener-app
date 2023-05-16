@@ -12,6 +12,7 @@ module.exports = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'hero-pattern': "url('/images/bg-shorten-mobile.svg')"
       },
     },
     colors: {
@@ -24,7 +25,8 @@ module.exports = {
       'grayViolet': 'rgb(158, 154, 167)',
       'darkBlue': 'rgb(53, 50, 62)',
       'veryDarkViolet': 'rgb(35, 33, 39)',
-      'white': 'rgb(255 255 255)'
+      'white': 'rgb(255 255 255)',
+      'bgGray': 'rgb(226 232 240)'
     }
   },
   plugins: [],
