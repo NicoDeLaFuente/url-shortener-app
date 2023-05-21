@@ -26,7 +26,7 @@ module.exports = {
       'darkBlue': 'rgb(53, 50, 62)',
       'veryDarkViolet': 'rgb(35, 33, 39)',
       'white': 'rgb(255 255 255)',
-      'bgGray': 'rgb(226 232 240)'
+      'bgGray': 'rgb(226 232 240)',
     }
   },
   plugins: [],
