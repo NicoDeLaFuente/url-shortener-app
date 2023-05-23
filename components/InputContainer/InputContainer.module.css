@@ -9,6 +9,7 @@
     border-radius: .5rem;
     display:flex;
     flex-direction: column;
+    width: 80%;
     margin-top: -4rem;
     gap:.5rem
 }
@@ -16,8 +17,9 @@
 @media screen and (min-width: 640px) {
     .backgroundImage {
         background-image: url(../../images/bg-shorten-desktop.svg);
-        max-width: 1020px;
+        max-width: 1024px;
         margin-inline: 2rem;
         padding: 1.5rem;
+        margin-top: -3rem;
     }
 }

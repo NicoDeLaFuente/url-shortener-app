@@ -27,6 +27,9 @@ module.exports = {
       'veryDarkViolet': 'rgb(35, 33, 39)',
       'white': 'rgb(255 255 255)',
       'bgGray': 'rgb(226 232 240)',
+    },
+    gridTemplateRows: {
+      'layout': 'repeat(auto-fill, 100px)',
     }
   },
   plugins: [],
