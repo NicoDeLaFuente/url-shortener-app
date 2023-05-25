@@ -5,16 +5,19 @@ import BurgerIcon from "../BurgerIcon/BurgerIcon"
 import NavList from "../NavList/NavList"
 export default function Nav () {
 
-    const [burgerMenu, setBurgerMenu] = useState()
+    const [isOpen, setIsOpen] = useState(true)
 
     const burgerHandler = () => {
-        setBurgerMenu(!burgerMenu)
+        setIsOpen(!isOpen)
+
         const nav = document.querySelector("#nav")
-        if (burgerMenu) {
+        if (isOpen) {
             nav.classList.remove("hidden")
         } else {
             nav.classList.add("hidden")
         }
+        
+        
     }
 
 
