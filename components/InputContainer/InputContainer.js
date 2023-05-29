@@ -10,8 +10,7 @@ import { data } from "autoprefixer";
 
 export default function InputContainer () {
 
-    const [link, setLink] = useState()
-    let dataArray = []
+    const [link, setLink] = useState([])
 
     const handleSubmit = async (event) => {
         const form = document.querySelector("#form")
@@ -22,27 +21,35 @@ export default function InputContainer () {
         const data = event.target.url.value
         
         if (data && data.length > 6) {
-        const response = fetch(`https://api.shrtco.de/v2/shorten?url=${data}`)
-        .then(res => res.json())
-        .then(newData => setLink(newData.result))
+            try {
+                const response = await fetch(`https://api.shrtco.de/v2/shorten?url=${data}`);
+                const newData = await response.json();
+                setLink([...link, newData.result]);
+                errorMessage.classList.add("hidden")
+            } catch (error) {
+                console.error('Error al llamar a la API:', error);    
+            }
+        } else {
+            errorMessage.classList.remove("hidden")
         }
 
-        if(!data || data.length <= 6) {
-            errorMessage.classList.remove("hidden")
-            form.reset()
-        } else {
-            errorMessage.classList.add("hidden")
-            form.reset()
-        }
+        event.target.reset()
     }
+
+    // Setting Local Storage. 
+    localStorage.setItem("links", JSON.stringify(link))
+
+    //Getting Local Storage
+    const linksInStorage = JSON.parse(localStorage.getItem("links"))
+    console.log(linksInStorage)
 
     return  <>
                 <div className={styles.backgroundImage}>
                     <FormShorten handleSubmit={handleSubmit}/>
                     <ErrorShorten/>
                 </div>
-                {
-                !link || link === undefined ? <></> : <UserShortenLinks key={link.data} data={link}/>
-                }
+                {link && link.length > 0 && link.map((link, index) => (
+                    <UserShortenLinks key={index} data={link} />
+                ))}
             </>
 }
