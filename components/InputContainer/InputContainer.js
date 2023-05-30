@@ -6,11 +6,13 @@ import FormShorten from "../FormShorten/FormShorten"
 import UserShortenLinks from "../UserShortenLinks/UserShortenLinks"
 
 import { useState, useEffect } from "react";
-import { data } from "autoprefixer";
+
 
 export default function InputContainer () {
 
     const [link, setLink] = useState([])
+    let linksArr = []
+    let linksInStorage = []
 
     const handleSubmit = async (event) => {
         const form = document.querySelector("#form")
@@ -25,6 +27,11 @@ export default function InputContainer () {
                 const response = await fetch(`https://api.shrtco.de/v2/shorten?url=${data}`);
                 const newData = await response.json();
                 setLink([...link, newData.result]);
+                linksArr.push(newData.result);
+
+                // storage the links in LocalStorage
+                localStorage.setItem('links', JSON.stringify(linksArr));
+
                 errorMessage.classList.add("hidden")
             } catch (error) {
                 console.error('Error al llamar a la API:', error);    
@@ -36,12 +43,19 @@ export default function InputContainer () {
         event.target.reset()
     }
 
+    useEffect(() => {
+        const storedLinks = localStorage.getItem('links');
+        if (storedLinks) {
+          linksInStorage = JSON.parse(storedLinks);
+          setLink([...link, ...linksInStorage]);
+        }
+      }, []);
+
     // Setting Local Storage. 
-    localStorage.setItem("links", JSON.stringify(link))
+    
 
     //Getting Local Storage
-    const linksInStorage = JSON.parse(localStorage.getItem("links"))
-    console.log(linksInStorage)
+   
 
     return  <>
                 <div className={styles.backgroundImage}>
